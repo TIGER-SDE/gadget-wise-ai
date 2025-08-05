@@ -6,10 +6,10 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    { name: "Configure", href: "#configure" },
-    { name: "Price Tracker", href: "#tracker" },
-    { name: "Market Analysis", href: "#analysis" },
-    { name: "Resale Assistant", href: "#resale" }
+    { name: "Configure", href: "#device-selector" },
+    { name: "Price Tracker", href: "#use-case-selector" },
+    { name: "Market Analysis", href: "#use-case-selector" },
+    { name: "Resale Assistant", href: "#use-case-selector" }
   ];
 
   return (
@@ -27,13 +27,16 @@ const Navigation = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             {menuItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
+                onClick={() => {
+                  const element = document.querySelector(item.href);
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="text-muted-foreground hover:text-foreground transition-smooth"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
           </div>
 
@@ -59,14 +62,17 @@ const Navigation = () => {
           <div className="md:hidden bg-card/95 backdrop-blur-sm border-t border-border/50">
             <div className="px-4 py-6 space-y-4">
               {menuItems.map((item) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
+                  onClick={() => {
+                    const element = document.querySelector(item.href);
+                    element?.scrollIntoView({ behavior: 'smooth' });
+                    setIsMenuOpen(false);
+                  }}
                   className="block text-muted-foreground hover:text-foreground transition-smooth"
-                  onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
-                </a>
+                </button>
               ))}
               <div className="pt-4 space-y-2">
                 <Button variant="ghost" className="w-full">Sign In</Button>

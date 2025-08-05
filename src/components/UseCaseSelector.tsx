@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Gamepad2, 
   Video, 
@@ -82,6 +83,7 @@ const useCases = [
 
 const UseCaseSelector = () => {
   const [selectedUseCases, setSelectedUseCases] = useState<string[]>([]);
+  const { toast } = useToast();
 
   const toggleUseCase = (useCaseId: string) => {
     setSelectedUseCases(prev => 
@@ -92,7 +94,7 @@ const UseCaseSelector = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-background to-card/30">
+    <section id="use-case-selector" className="py-20 px-4 bg-gradient-to-b from-background to-card/30">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
@@ -176,7 +178,18 @@ const UseCaseSelector = () => {
                 })}
               </div>
             </div>
-            <Button variant="hero" size="lg" className="text-lg px-12">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="text-lg px-12"
+              onClick={() => {
+                toast({
+                  title: "AI Recommendations Generated!",
+                  description: `Processing ${selectedUseCases.length} use case${selectedUseCases.length > 1 ? 's' : ''} to find the perfect device configurations for you.`,
+                });
+                console.log("Generating recommendations for:", selectedUseCases);
+              }}
+            >
               Generate AI Recommendations
             </Button>
           </div>

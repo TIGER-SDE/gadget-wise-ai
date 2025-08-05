@@ -34,7 +34,7 @@ const DeviceSelector = () => {
   const [selectedDevice, setSelectedDevice] = useState<string | null>(null);
 
   return (
-    <section className="py-20 px-4">
+    <section id="device-selector" className="py-20 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
@@ -92,6 +92,12 @@ const DeviceSelector = () => {
                   <Button 
                     variant={isSelected ? "tech" : "ghost"} 
                     className="w-full group"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedDevice(device.id);
+                      const useCaseSelector = document.querySelector('#use-case-selector');
+                      useCaseSelector?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                   >
                     {isSelected ? "Configure Now" : "Select Device"}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -104,7 +110,15 @@ const DeviceSelector = () => {
 
         {selectedDevice && (
           <div className="text-center mt-12">
-            <Button variant="hero" size="lg" className="text-lg px-12">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="text-lg px-12"
+              onClick={() => {
+                const useCaseSelector = document.querySelector('#use-case-selector');
+                useCaseSelector?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               Continue with {devices.find(d => d.id === selectedDevice)?.name}
               <ArrowRight className="w-5 h-5" />
             </Button>

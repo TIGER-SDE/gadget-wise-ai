@@ -44,11 +44,27 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Button variant="hero" size="lg" className="text-lg px-8">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="text-lg px-8"
+              onClick={() => {
+                const deviceSelector = document.querySelector('#device-selector');
+                deviceSelector?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               Start Configuring
               <ArrowRight className="w-5 h-5" />
             </Button>
-            <Button variant="glass" size="lg" className="text-lg px-8">
+            <Button 
+              variant="glass" 
+              size="lg" 
+              className="text-lg px-8"
+              onClick={() => {
+                const useCaseSelector = document.querySelector('#use-case-selector');
+                useCaseSelector?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               View Demo
             </Button>
           </div>
