@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Shield, TrendingUp } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-tech.jpg";
 
 const HeroSection = () => {
@@ -44,29 +45,17 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Button 
-              variant="hero" 
-              size="lg" 
-              className="text-lg px-8"
-              onClick={() => {
-                const deviceSelector = document.querySelector('#device-selector');
-                deviceSelector?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Start Configuring
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-            <Button 
-              variant="glass" 
-              size="lg" 
-              className="text-lg px-8"
-              onClick={() => {
-                const useCaseSelector = document.querySelector('#use-case-selector');
-                useCaseSelector?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              View Demo
-            </Button>
+            <Link to="/configure">
+              <Button variant="hero" size="lg" className="text-lg px-8">
+                Start Configuring
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </Link>
+            <Link to="/market-analysis">
+              <Button variant="glass" size="lg" className="text-lg px-8">
+                View Demo
+              </Button>
+            </Link>
           </div>
 
           {/* Feature Icons */}

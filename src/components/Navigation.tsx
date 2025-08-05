@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Zap } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const menuItems = [
-    { name: "Configure", href: "#device-selector" },
-    { name: "Price Tracker", href: "#use-case-selector" },
-    { name: "Market Analysis", href: "#use-case-selector" },
-    { name: "Resale Assistant", href: "#use-case-selector" }
+    { name: "Configure", href: "/configure" },
+    { name: "Price Tracker", href: "/price-tracker" },
+    { name: "Market Analysis", href: "/market-analysis" },
+    { name: "Resale Assistant", href: "/resale-assistant" }
   ];
 
   return (
@@ -17,26 +19,27 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <Zap className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold text-foreground">GadgetWise</span>
-          </div>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             {menuItems.map((item) => (
-              <button
+              <Link
                 key={item.name}
-                onClick={() => {
-                  const element = document.querySelector(item.href);
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="text-muted-foreground hover:text-foreground transition-smooth"
+                to={item.href}
+                className={`transition-smooth ${
+                  location.pathname === item.href
+                    ? "text-accent font-medium"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
                 {item.name}
-              </button>
+              </Link>
             ))}
           </div>
 
@@ -62,17 +65,18 @@ const Navigation = () => {
           <div className="md:hidden bg-card/95 backdrop-blur-sm border-t border-border/50">
             <div className="px-4 py-6 space-y-4">
               {menuItems.map((item) => (
-                <button
+                <Link
                   key={item.name}
-                  onClick={() => {
-                    const element = document.querySelector(item.href);
-                    element?.scrollIntoView({ behavior: 'smooth' });
-                    setIsMenuOpen(false);
-                  }}
-                  className="block text-muted-foreground hover:text-foreground transition-smooth"
+                  to={item.href}
+                  className={`block transition-smooth ${
+                    location.pathname === item.href
+                      ? "text-accent font-medium"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
-                </button>
+                </Link>
               ))}
               <div className="pt-4 space-y-2">
                 <Button variant="ghost" className="w-full">Sign In</Button>
