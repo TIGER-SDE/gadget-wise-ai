@@ -14,6 +14,12 @@ import {
   Music
 } from "lucide-react";
 
+interface UseCaseSelectorProps {
+  selectedUseCases: string[];
+  onUseCaseToggle: (useCaseId: string) => void;
+  onGenerateRecommendations: () => void;
+}
+
 const useCases = [
   {
     id: "gaming",
@@ -81,17 +87,8 @@ const useCases = [
   }
 ];
 
-const UseCaseSelector = () => {
-  const [selectedUseCases, setSelectedUseCases] = useState<string[]>([]);
+const UseCaseSelector = ({ selectedUseCases, onUseCaseToggle, onGenerateRecommendations }: UseCaseSelectorProps) => {
   const { toast } = useToast();
-
-  const toggleUseCase = (useCaseId: string) => {
-    setSelectedUseCases(prev => 
-      prev.includes(useCaseId)
-        ? prev.filter(id => id !== useCaseId)
-        : [...prev, useCaseId]
-    );
-  };
 
   return (
     <section id="use-case-selector" className="py-20 px-4 bg-gradient-to-b from-background to-card/30">
@@ -118,7 +115,7 @@ const UseCaseSelector = () => {
                     ? 'ring-2 ring-accent shadow-glow bg-card/80' 
                     : 'hover:shadow-card bg-card/50'
                 }`}
-                onClick={() => toggleUseCase(useCase.id)}
+                onClick={() => onUseCaseToggle(useCase.id)}
               >
                 <div className="p-6">
                   {/* Icon and Selection Badge */}
@@ -188,6 +185,7 @@ const UseCaseSelector = () => {
                   description: `Processing ${selectedUseCases.length} use case${selectedUseCases.length > 1 ? 's' : ''} to find the perfect device configurations for you.`,
                 });
                 console.log("Generating recommendations for:", selectedUseCases);
+                onGenerateRecommendations();
               }}
             >
               Generate AI Recommendations

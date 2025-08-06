@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Smartphone, Laptop, Monitor, ArrowRight } from "lucide-react";
 
+interface DeviceSelectorProps {
+  selectedDevice: string | null;
+  onDeviceSelect: (deviceId: string) => void;
+}
+
 const devices = [
   {
     id: "mobile",
@@ -30,8 +35,7 @@ const devices = [
   }
 ];
 
-const DeviceSelector = () => {
-  const [selectedDevice, setSelectedDevice] = useState<string | null>(null);
+const DeviceSelector = ({ selectedDevice, onDeviceSelect }: DeviceSelectorProps) => {
 
   return (
     <section id="device-selector" className="py-20 px-4">
@@ -58,7 +62,7 @@ const DeviceSelector = () => {
                     ? 'ring-2 ring-accent shadow-glow' 
                     : 'hover:shadow-card'
                 }`}
-                onClick={() => setSelectedDevice(device.id)}
+                onClick={() => onDeviceSelect(device.id)}
               >
                 {/* Gradient Background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${device.gradient} opacity-10`} />
@@ -94,7 +98,7 @@ const DeviceSelector = () => {
                     className="w-full group"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSelectedDevice(device.id);
+                      onDeviceSelect(device.id);
                       const useCaseSelector = document.querySelector('#use-case-selector');
                       useCaseSelector?.scrollIntoView({ behavior: 'smooth' });
                     }}
