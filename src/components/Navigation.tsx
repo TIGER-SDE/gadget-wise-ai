@@ -6,6 +6,8 @@ import { Link, useLocation } from "react-router-dom";
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  
+  console.log("Navigation rendered, current path:", location.pathname);
 
   const menuItems = [
     { name: "Configure", href: "/configure" },
