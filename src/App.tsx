@@ -5,6 +5,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Configure from "./pages/Configure";
+import Dashboard from "./pages/Dashboard";
+import Comparison from "./pages/Comparison";
+import Reviews from "./pages/Reviews";
+import BudgetCalculator from "./pages/BudgetCalculator";
+import TechNews from "./pages/TechNews";
 import PriceTracker from "./pages/PriceTracker";
 import MarketAnalysis from "./pages/MarketAnalysis";
 import ResaleAssistant from "./pages/ResaleAssistant";
@@ -24,6 +29,11 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/configure" element={<Configure />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/comparison" element={<Comparison />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/budget-calculator" element={<BudgetCalculator />} />
+            <Route path="/tech-news" element={<TechNews />} />
             <Route path="/price-tracker" element={<PriceTracker />} />
             <Route path="/market-analysis" element={<MarketAnalysis />} />
             <Route path="/resale-assistant" element={<ResaleAssistant />} />

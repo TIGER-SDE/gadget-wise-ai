@@ -11,6 +11,11 @@ const Navigation = () => {
 
   const menuItems = [
     { name: "Configure", href: "/configure" },
+    { name: "Dashboard", href: "/dashboard" },
+    { name: "Compare", href: "/comparison" },
+    { name: "Reviews", href: "/reviews" },
+    { name: "Budget", href: "/budget-calculator" },
+    { name: "News", href: "/tech-news" },
     { name: "Price Tracker", href: "/price-tracker" },
     { name: "Market Analysis", href: "/market-analysis" },
     { name: "Resale Assistant", href: "/resale-assistant" }
